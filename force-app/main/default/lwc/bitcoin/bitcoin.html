@@ -1,0 +1,16 @@
+<template>
+    <lightning-button label="Get Platinum Price" onclick={handleGetPriceClick}></lightning-button>
+
+    <template if:true={priceData}>
+        <div class="slds-box slds-box_xx-small">
+            <h3>Platinum Price</h3>
+            <p><strong>Price:</strong> {price}</p> <!-- Using the getter here -->
+        </div>
+    </template>
+
+    <template if:true={error}>
+        <div class="slds-text-color_error">
+            <p>{error}</p>
+        </div>
+    </template>
+</template>
