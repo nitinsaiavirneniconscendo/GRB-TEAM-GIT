@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title ="Created Accounts">
+    <lightning-input  name="accName" label="Account Name" value={accName} onchange={handleChange} placeholder="Enter Account Name ........"></lightning-input>
+    <lightning-button variant="brand" label="Add" onclick={handleAdd}></lightning-button>
+    <template if:true={accList}>
+    <lightning-datatable key-field="Id" data={accList} columns={columns} hide-checkbox-column="true"> </lightning-datatable>
+    </template>
+    <lightning-button label="Create" variant="success" onclick={handleCreate}></lightning-button>
+    </lightning-card>
+</template>

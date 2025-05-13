@@ -1,0 +1,118 @@
+<template>
+    <lightning-card title="Spotify Search" icon-name="custom:custom19">
+        <div class="custom-card-body">
+            <div class="search-container">
+                <lightning-input
+                    type="text"
+                    label="Search for an artist, album, or song"
+                    value={searchQuery}
+                    onchange={handleSearchChange}
+                    onkeypress={handleKeyPress}
+                    class="white-label">
+                </lightning-input>
+                
+                <lightning-button
+                    label="Search"
+                    variant="brand"
+                    onclick={handleSearch}
+                    class="search-button">
+                </lightning-button>
+            </div>
+            
+            <template if:true={isLoading}>
+                <div class="spinner-container">
+                    <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+                </div>
+            </template>
+            
+            <div class="results-container">
+                <template if:true={hasResults}>
+                    <div class="slds-grid slds-wrap">
+                        <template for:each={results} for:item="item">
+                            <div key={item.id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
+                                <div class="result-card">
+                                    <div class="album-art-container">
+                                        <img src={item.image} alt={item.name} class="album-art" onerror={handleImageError} />
+                                    </div>
+                                    <div class="track-info">
+                                        <p class="track-name">{item.name}</p>
+                                        <p class="artist-name">{item.artist}</p>
+                                    </div>
+                                    
+                                    <!-- Play/Pause Button for tracks -->
+                                    <template if:true={item.isTrack}>
+                                        <div class="play-button-container">
+                                            <button 
+                                                onclick={handleTogglePlay} 
+                                                data-id={item.id}
+                                                class="play-button"
+                                                class:playing={item.isPlaying}>
+                                                <template if:false={item.isPlaying}>
+                                                    <span class="play-icon">▶</span>
+                                                </template>
+                                                <template if:true={item.isPlaying}>
+                                                    <span class="pause-icon">❚❚</span>
+                                                </template>
+                                            </button>
+                                        </div>
+                                    </template>
+                                    
+                                    <!-- Open Button for albums -->
+                                    <template if:true={item.isAlbum}>
+                                        <div class="play-button-container">
+                                            <button class="play-button album" onclick={handleTogglePlay} data-id={item.id}>
+                                                <span class="open-icon">🎵</span>
+                                            </button>
+                                        </div>
+                                    </template>
+                                    
+                                    <!-- Icon for artists -->
+                                    <template if:true={item.isArtist}>
+                                        <div class="play-button-container">
+                                            <button class="play-button artist" onclick={handleTogglePlay} data-id={item.id}>
+                                                <span class="artist-icon">👤</span>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                
+                <template if:false={hasResults}>
+                    <div class="no-results">
+                        <p>No results found. Try searching for a song, artist, or album.</p>
+                    </div>
+                </template>
+            </div>
+            
+            <!-- Audio Player -->
+            <template if:true={isPlayerVisible}>
+                <div class="audio-player-container">
+                    <div class="now-playing">
+                        <div class="now-playing-info">
+                            <template if:true={currentTrackData}>
+                                <img src={currentTrackData.image} alt="Album Art" class="now-playing-art" />
+                                <div class="now-playing-text">
+                                    <p class="now-playing-title">{currentTrackData.name}</p>
+                                    <p class="now-playing-artist">{currentTrackData.artist}</p>
+                                </div>
+                            </template>
+                        </div>
+                        
+                        <!-- Audio element with explicit preload attribute and type -->
+                        <audio src={audioUrl} controls preload="auto" type="audio/mpeg"></audio>
+                        
+                        <!-- Debug Info Section (for development) -->
+                        <!-- Uncomment for debugging -->
+                        <!-- <div class="debug-info">
+                            <p>Debug Info:</p>
+                            <pre>{debugInfo}</pre>
+                        </div> -->
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
