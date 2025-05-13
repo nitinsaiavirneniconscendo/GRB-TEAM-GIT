@@ -1,48 +1,18 @@
+# Salesforce DX Project: Next Steps
 
-# 🔗 Salesforce Integration Scenarios
+Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
 
-## 1. 📈 Bitcoin Price Tracker (CoinDesk API)
-- **Goal**: Integrate with the CoinDesk API to fetch current Bitcoin prices.
-- **Implementation**:
-  - Perform a callout to the CoinDesk API.
-  - Parse the response and store the data in a custom `Bitcoin_Price__c` object.
+## How Do You Plan to Deploy Your Changes?
 
-## 2. 🌦 Daily Weather Updater (OpenWeatherMap API)
-- **Goal**: Schedule a job to retrieve and update weather data daily.
-- **Implementation**:
-  - Use `Schedulable` Apex class to call the OpenWeatherMap API.
-  - Update a custom object `Weather_Data__c` with the latest weather information.
+Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
 
-## 3. 📡 Real-Time Integration with Platform Events
-- **Goal**: Send real-time Opportunity data to an external system.
-- **Implementation**:
-  - Define a `SendOpportunityEvent__e` platform event.
-  - Publish the event when a new Opportunity is created.
-  - Call an external mock API endpoint using an asynchronous trigger handler.
+## Configure Your Salesforce DX Project
 
-## 4. 🌐 Custom REST API via @RestResource
-- **Goal**: Expose a REST endpoint to allow external systems to create Leads.
-- **Implementation**:
-  - Use `@RestResource` annotation to define a POST endpoint.
-  - Accept JSON payload and insert the Lead into Salesforce.
+The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
 
-## 5. 🔁 Multi-Step API Integration
-- **Goal**: Combine data fetching, storage, and confirmation message.
-- **Implementation**:
-  1. Fetch weather data from OpenWeatherMap.
-  2. Store the data in a `Weather_Integration__c` object.
-  3. Send an outbound HTTP POST to a mock external system to confirm receipt.
+## Read All About It
 
-## 6. 🚨 Error Handling in Integrations
-- **Goal**: Implement robust error handling.
-- **Techniques**:
-  - Use `try-catch` blocks for callouts.
-  - Define custom exceptions for specific failure cases.
-  - Add retry logic (exponential backoff or retry counter) for failed callouts.
-
-## 7. 🛰 Change Data Capture (CDC) to External API
-- **Goal**: React to Opportunity changes and notify external systems.
-- **Implementation**:
-  - Enable CDC for the Opportunity object.
-  - Subscribe using a CDC trigger or Platform Event listener.
-  - Call an external API when changes are detected.
+- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
+- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
+- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
+- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
