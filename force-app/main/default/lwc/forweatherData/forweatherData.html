@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Weather Information" icon-name="utility:cloud">
+        <lightning-button label="Get Weather Data" onclick={handleGetWeatherClick}></lightning-button>
+ 
+        <template if:true={weatherData}>
+            <div class="slds-box slds-box_xx-small slds-theme_default slds-m-top_small">
+                <h3>Weather Details:</h3>
+                <p><strong>Location:</strong> {weatherData.location}</p>
+                <p><strong>Temperature:</strong> {weatherData.temperature} K</p>
+                <p><strong>Humidity:</strong> {weatherData.humidity}%</p>
+                <p><strong>Weather:</strong> {weatherData.description}</p>
+            </div>
+        </template>
+ 
+        <template if:true={error}>
+            <div class="slds-text-color_error">
+                <p>{error}</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>
