@@ -1,0 +1,10 @@
+@IsTest
+global class CalloutMock implements HttpCalloutMock {
+    global HTTPResponse respond(HTTPRequest req) {
+        HttpResponse res = new HttpResponse();
+        res.setHeader('Content-Type', 'application/json');
+        res.setBody('{"message": "Mocked response ✅"}');
+        res.setStatusCode(200);
+        return res;
+    }
+}
