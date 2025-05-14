@@ -1,4 +1,4 @@
-@RestResource(URLMapping='/AccountsUpdateService/*')
+@RestResource(URLMapping='/AccountsUpdateServices/*')
 Global class AccountRecordsManagerService 
 {
 	@HttpPut
